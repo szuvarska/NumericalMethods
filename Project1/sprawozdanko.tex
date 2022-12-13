@@ -96,18 +96,18 @@ Niech $S_1$ i $S_2$ będą złożonymi kwadraturami prostokątów (z punktem śr
 \vskip3ex
 $S_1(g_1) = H_1\Sigma_{i=1}^{N}g_1((i-0.5)H_1)$, $H_1 = \frac{1-0}{N}$
 
-$S_2(g_2) = H_2\Sigma_{j=1}^{N}g_2((j-0.5)H_2)$, $H_2 = \frac{2\pi-0}{N}$
+$S_2(g_2) = H_2\Sigma_{j=1}^{M}g_2((j-0.5)H_2)$, $H_2 = \frac{2\pi-0}{M}$
 
 \vskip3ex
 
-$S(g) = S_2(S_1(g)) = H_1\Sigma_{j=1}^{N}(H_2\Sigma_{i=1}^{N}g((i-0.5)H_1,(j-0.5)H_2)) = $
+$S(g) = S_2(S_1(g)) = H_1\Sigma_{j=1}^{M}(H_2\Sigma_{i=1}^{N}g((i-0.5)H_1,(j-0.5)H_2)) = $
 
-$= H_1H_2\Sigma_{j=1}^{N}\Sigma_{i=1}^{N}g((i-0.5)H,(j-0.5)H)$
+$= H_1H_2\Sigma_{j=1}^{M}\Sigma_{i=1}^{N}g((i-0.5)H_1,(j-0.5)H_2)$
 \vskip3ex
 
 Otrzymaliśmy kwadraturę, którą się posłużymy do obliczenia przybliżonej wartości całki.
 \begin{equation}
-    S(g) = H_1H_2\Sigma_{j=1}^{N}\Sigma_{i=1}^{N}g((i-0.5)H,(j-0.5)H)
+    S(g) = H_1H_2\Sigma_{j=1}^{M}\Sigma_{i=1}^{N}g((i-0.5)H_1,(j-0.5)H_2)
 \end{equation}
 
 \vskip20pt
@@ -119,8 +119,7 @@ Program składa się z kilku funkcji:
 \item \textbf{main.m} - funkcja główna, którą uruchamiamy program. Funkcja tworzy wykres 3D funkcji f, oblicza dokładną wartość całki f i przybliżoną za pomocą złożonej kwadratury prostokątów z punktem środkowym oraz błąd między tymi wartościami. Nie przyjmuje żadnych parametrów i nic nie zwraca.
 \item \textbf{f.m} - funkcja, którą całkujemy. Przyjmuje parametry x i y będące współrzędnymi. Zwraca wartość funkcji.
 \item \textbf{f\_bieg.m} - funkcja przekształca funkcję f na współrzędne biegunowe. Przyjmuje parametry r (promień) i phi (kąt). Zwraca wartość przekształconej funkcji. Został tutaj zastosowany wzór użyty w $(1)$.
-\item \textbf{S\_x.m} - funkcja stosuje złożoną kwadraturę prostokątów z punktem środkowym na danej funkcji ze względu na zmienną x. Poza funkcją pozostałe przyjmowane parametry to współrzędna y, granice całkowania a i b oraz liczba kroków N. Zwraca wyliczoną wartość za pomocą kwadratury. Wartość ta jest liczona poprzez zastosowanie wzoru $(2)$. Sumę liczymy za pomocą pętli for. 
-\item \textbf{S.m} - funkcja stosuje złożoną kwadraturę prostokątów z punktem środkowym na danej funkcji. Poza funkcją przyjmowane parametry granice całkowania a,b,c,d i liczba kroków N. Zwraca wyliczoną wartość za pomocą kwadratury. Wartość ta jest liczona poprzez zastosowanie wzoru $(3)$. Liczymy sumę za pomocą pętli for po ze względu na zmiennej y, korzystając z funkcji S\_x do policzenia wartości kwadratury ze względu na x.
+\item \textbf{S.m} - funkcja stosuje złożoną kwadraturę prostokątów z punktem środkowym na danej funkcji. Poza funkcją przyjmowane parametry granice całkowania a,b,c,d i liczba kroków N, M. Zwraca wyliczoną wartość za pomocą kwadratury. Wartość ta jest liczona poprzez zastosowanie wzoru $(3)$. Tworzymy macierz wartości funkcji f za pomocą zagnieżdżonej pętli for. Sumujemy wszystkie wartości za pomocą wektoryzacji i mnożymy przez współczynnik.
 \end{enumerate}
 
 

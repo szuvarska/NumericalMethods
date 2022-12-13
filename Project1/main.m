@@ -13,9 +13,10 @@ d = 2*pi;
 
 % Liczba podprzedziałów dla kwadratury złożonej
 N = 1000;
+M = 1000;
 
 % Liczenie wartości całki na dwa sposoby i błędu
-przyblizona_wartosc = S(@f_bieg,a,b,c,d,N)
+przyblizona_wartosc = S(@f_bieg,a,b,c,d,N,M)
 dokladna_wartosc = integral2(@f_bieg,a,b,c,d)
 blad = abs(dokladna_wartosc - przyblizona_wartosc)
 

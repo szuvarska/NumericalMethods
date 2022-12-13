@@ -1,4 +1,4 @@
-function [output] = S(f,a,b,c,d,N,M)
+function [output] = S(f,a,b,c,d)
 % Funkcja stosuje złożoną kwadraturę prostokątów z punktem środkowym
 % na funkcji f
 % f - funkcja
@@ -11,14 +11,14 @@ function [output] = S(f,a,b,c,d,N,M)
 H1 = (b-a)/N;
 H2 = (d-c)/M;
 
-% Macierz z wartościami funkcji f
+% Macierz z wartościami funkcji f w węzłach
+x = linspace(a,b,N);
+y = linspace(c,d,M);
 for i=1:N
     for j=1:M
-        A(i,j) = f((i-0.5)*H1,(j-0.5)*H2);
+        A(i,j) = f(x(i),j(i));
     end
 end
 
 % Suma wartości pomnożona przez współczynnik H1*H2
-output = H1.*H2.*sum(A,'all')
-
-end
+output
