@@ -11,11 +11,8 @@ H = (b-a)/N;
 
 % Kwadratura ze względu na zmienną x
 sum = 0;
-x = f(a,y);
 for k = 1:N
-    sum = sum + f(x+H/2,y);
-    x = x + H;
+    sum = sum + f((k-0.5)*H,y);
 end
-sum = sum * H;
 end
 

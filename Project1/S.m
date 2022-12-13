@@ -9,14 +9,13 @@ function [sum] = S(f,a,b,c,d,N)
 
 % Długość podprzedziału
 H = (d-c)/N;
+h = (b-a)/N;
 
 % Kwadratura ze względu na zmienną y
 % stosowana do gotowej kwadratury ze względu na zmienną x
 sum = 0;
-y = S_x(f,c,a,b,N);
 for k = 1:N
-    sum = sum + S_x(f,y+H/2,a,b,N);
-    y = y + H;
+    sum = sum + S_x(f,(k-0.5)*H,a,b,N);
 end
-sum = sum * H;
+sum = sum * H*h;
 end

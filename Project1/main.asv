@@ -15,9 +15,9 @@ d = 2*pi;
 N = 1000;
 
 % Liczenie wartości całki na dwa sposoby i błędu
-przyblizona_wartosc = S(@f_bieg,a,b,c,d,N)
-dokladna_wartosc = integral2(@f_bieg,a,b,c,d)
-blad = abs(dokladna_wartosc - przyblizona_wartosc)
+przyblizona_wartosc = S(@f_bieg,a,b,c,d,N);
+dokladna_wartosc = integral2(@f_bieg,a,b,c,d);
+blad = abs(dokladna_wartosc - przyblizona_wartosc);
 
 % Tworzenie siatki do wykresu
 [r, phi] = meshgrid(linspace(a,b),linspace(c,d));
@@ -28,12 +28,7 @@ Z = f(X,Y);
 % Rysowanie wykresu
 figure
 mesh(X,Y,Z);
-title("f(x,y) = exp(x^3-y)")
-%title("f(x,y) = 1/sqrt(1-x^2)")
-%title("f(x,y) = (x/y)^{10}")
-%title("f(x,y) = sin(x-y)")
-%title("f(x,y) = sqrt(x)+y")
-%title("f(x,y) = log(x*y)");
+title("f(x,y) = 1/(x^2+y^2).^")
 xlabel('x');
 ylabel('y');
 zlabel('f(x,y)')

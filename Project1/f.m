@@ -5,14 +5,11 @@ function [output] = f(x,y)
 
 output = exp(x.^3-y);
 
-% Szczególne przypadki:
-%output = (x./y).^10; %NaN
-%output = 1./(x.^2+y.^2).^(3/2); %NaN
-%output = 1./sqrt(abs(x))-1./sqrt(abs(y)); %NaN
-%output = x; % przechylone koło
-%output = 7; %liczy się, ale problem z wykresem
-%output = sin(x-y); % dokładna wartość jest ujemna, a przybliżona dodatnia
-%output = x.^5.*y+1; % wychodzi pi
+% Inne przykładowe funkcje:
+%output = 1./sqrt(1-x.^2);
+%output = (x./y).^10;
+%output = sin(x-y);
+%output = sqrt(x)+y;
+%output = log(x.*y);
 
 end
-
