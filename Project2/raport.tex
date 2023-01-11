@@ -117,7 +117,7 @@ end
 Przeróbmy ten algorytm tak, aby skorzystać z macierzy $A^*$.
 \vskip3ex
 
-Wartości z $i$-tego wiersza macierz $A$ znajdują się w $i$-tej kolumnie $A^*$. 
+Wartości z $i$-tego wiersza macierzy $A$ znajdują się w $i$-tej kolumnie $A^*$. 
 \vskip3ex
 Dla $i=1$ w $i$-tym wierszu niezerowe wartości znajdują się w kolumnach $1,2$. Dla $i=n$ w $i$-tym wierszu niezerowe wartości znajdują się w kolumnach $n,n-1$. W pozostałych przypadkach w $i$-tym wierszu niezerowe wartości znajdują się w kolumnach $i,i+1,i+2$.
 \vskip3ex
@@ -224,7 +224,7 @@ end
 Program składa się z kilku plików:
 \begin{enumerate}
 \item \textbf{Main.m} - główny skrypt, w którym inicjalizujemy zmienne, rozwiązujemy układ Ax = b za pomocą metody dokładnej i przybliżonej BSOR, liczymy błąd względny i rysujemy jego wykres.
-\item \textbf{BSOR.m} - funkcja rozwiązująca układ Ax = b metodą BSOR z warunkiem stopu $|Ax^(k)-b||<d$. Przyjmuje macierz trójdiagonalną $A$, wektor $b$, parametr relaksacji $\omega$, początkowy wektor rozwiązania $x_0$, tolerancję dla warunku stopu $d$ i maksymalną liczbę iteracji $M$. Zwraca rozwiązanie $x$, promień spektralny macierzy iteracji $rho_B$, wskaźnik uwarunkowania macierzy A $cond_A$ i liczbę iteracji $k$.
+\item \textbf{BSOR.m} - funkcja rozwiązująca układ Ax = b metodą BSOR z warunkiem stopu $|Ax^{(k)}-b||<d$. Przyjmuje macierz trójdiagonalną $A$, wektor $b$, parametr relaksacji $\omega$, początkowy wektor rozwiązania $x_0$, tolerancję dla warunku stopu $d$ i maksymalną liczbę iteracji $M$. Zwraca rozwiązanie $x$, promień spektralny macierzy iteracji $rho_B$, wskaźnik uwarunkowania macierzy A $cond_A$ i liczbę iteracji $k$.
 \item \textbf{Solve.m} - funkcja rozwiązuje układ równań $Ax=b$ dla macierzy trójdiagonalnej za pomocą algorytmu Thomasa. Przyjmuje macierz trójdiagonalną $A$ i wektor $b$. Zwraca rozwiązanie $x$.
 \end{enumerate}
 
@@ -254,7 +254,7 @@ Program składa się z kilku plików:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 12cm]{wykres1.png}
+    \includegraphics[width = 15cm]{wykres1.png}
     \caption{Wykres przedstawia błąd względny dla kolejnych współrzędnych rozwiązania. Promień spektralny jest mały, więc metoda zbiega szybko. Widać to też po tym, że potrzebne było jedynie 25 iteracji, żeby poradzić sobie z tolerancją $10^{-16}$.}
 \end{figure}
 
@@ -278,7 +278,7 @@ Program składa się z kilku plików:
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width = 12cm]{wykres2.png}
+    \includegraphics[width = 15cm]{wykres2.png}
     \caption{Wykres przedstawia błąd względny dla kolejnych współrzędnych rozwiązania. Promień spektralny przekracza 1, więc metoda jest rozbieżna. Z tego powodu błąd względny wychodzi ogromny.}
 \end{figure}
 
@@ -517,5 +517,15 @@ Na podstawie wyników można zauważyć kilka obserwacji:
     \item w przypadku $d = 10^{-15}$ liczba iteracji przekracza 100 dla $\omega \in (-\infty,0.4)\cup(1.8,\infty)$,
     \item najmniej iteracji potrzeba dla $\omega \approx 1.1$.
 \end{itemize}
+
+\section{Literatura}
+\begin{enumerate}
+\item https://www.degruyter.com/document/doi/10.1515/math-2016-0065/html
+\item http://www.industrial-maths.com/ms6021\_thomas.pdf
+\item https://www.sciencedirect.com/science/article/pii/S0377042700007056
+\item https://www-users.cse.umn.edu/~saad/IterMethBook\_2ndEd.pdf
+\item https://journalofinequalitiesandapplications.springeropen.com/counter/pdf/10.1186/s13660-016-1100-6.pdf
+\item http://www-solar.mcs.st-andrews.ac.uk/~clare/Lectures/num-analysis/Numan\_chap2.pdf
+\end{enumerate}
 
 \end{document}
