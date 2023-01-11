@@ -1,0 +1,65 @@
+function[x,rho_B,cond_A, k] = BSOR(A,b,w,x0,d,M)
+% Funkcja rozwiązujaca układ Ax = b metodą BSOR z warunkiem stopu
+% ||Ax^(k)-b||<d
+
+% A - macierz rozmiaru 3xn przedstawiona w postaci 
+% [podprzekątna,diagonala, nadprzekątna]
+% b - wektor wierszowy rozmiaru n
+% w - paramter relaksacji
+% x0 - wektor rozwiązania w 0-wej iteracji
+% d - tolerancja dla warunku stopu
+% M - maksymalna liczba iteracji
+
+% x - wektor z rozwiązaniem układu
+% rho_B - promień spektralny macierzy iteracji
+% cond_A - wskaźnik uwarunkowania macierzy A
+% k - liczba iteracji
+
+% Rozmiary macierzy A
+[n,m] = size(A);
+
+% Wyrzucamy błąd, jeśli A nie jest trójdiagonalna
+if n~=3
+    error("Macierz A nie jest trójdiagonalna!");
+end
+
+% Wyrzucamy błąd, jeśli liczba elementów wektora b jest różna od liczby
+% wierszy macierzy A
+if length(b)~=m
+    error("Wektor b ma zły rozmiar!")
+end
+
+% Przedstawiamy A za pomocą rozkładu na L, D i U
+L = diag(A(1,2:m),-1);
+U = diag(A(3,1:m-1),1);
+D = diag(A(2,:));
+
+linsolve(L+U+D,b')
+
+% Tworzymy macierz iteracji B
+B = (D-w.*U)^-1*((1-w).*D+w.*L);
+
+% Obliczamy promień spektralny
+rho_B = max(abs(eig(B)));
+
+% Obliczamy wskaźnik uwarunkowania
+cond_A = norm((L+U+D)^-1)*norm(L+U+D);
+
+% Inicjalizujemy numer iteracji (k)
+k = 0;
+
+% Inicjalizujemy wektor będący rozwiązaniem (x)
+x = [0; x0; 0];
+
+% Przechodzimy po pętli dopóki liczba iteracji nie przekracza M oraz nie
+% jest spełniony warunek stopu: ||Ax - b|| < d
+while k < M && norm((L+U+D)*x(2:m+1) - b') >= d
+    % Przechodzimy po elementach wektora x w odwrotnej kolejności
+    for i = m:-1:1
+        % Aktualizujemy i-ty element rozwiązania
+        x(i+1) = x(i+1) + w*(b(i) - sum(A(:,i).*x(i:i+2)))/A(2,i);
+    end
+    % Aktualizujemy numer iteracji
+    k = k + 1;
+end
+x = x(2:m+1);
